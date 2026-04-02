@@ -15,12 +15,12 @@
         Home
       </router-link>
 
-      <router-link 
-        to="/cart" 
-        class="hover:text-yellow-300 transition duration-300"
-      >
-        Cart 🛒
-      </router-link>
+     <a 
+  href="#cart-section" 
+  class="hover:text-yellow-300 transition duration-300 cursor-pointer"
+>
+  Cart 🛒
+</a>
     </div>
 
   </nav>

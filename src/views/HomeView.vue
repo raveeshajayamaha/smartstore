@@ -3,6 +3,9 @@ import { ref, onMounted, computed } from "vue"
 import api from "../services/api"
 import ProductCard from "../components/ProductCard.vue";
 import type { Product } from "../types/product"
+import { useCart } from "../store/cart"
+
+const { cart, removeFromCart, total } = useCart()
 
 const products = ref<Product[]>([])
 const search = ref("")
@@ -61,6 +64,35 @@ const categories = computed(() => {
         :product="p"
       />
     </div>
+    <!-- 🛒 CART SECTION -->
+<div class="mt-10 p-4 border rounded-lg bg-gray-100">
+  <h2 class="text-2xl font-bold mb-4">🛒 Cart</h2>
+
+  <div v-if="cart.length === 0">
+    Cart is empty
+  </div>
+
+  <div
+    v-for="item in cart"
+    :key="item.id"
+    class="flex justify-between items-center mb-2"
+  >
+    <div>
+      {{ item.title }} - ${{ item.price }}
+    </div>
+
+    <button
+      @click="removeFromCart(item.id)"
+      class="bg-red-500 text-white px-2 py-1 rounded"
+    >
+      Remove
+    </button>
+  </div>
+
+  <div v-if="cart.length > 0" class="mt-4 font-bold">
+    Total: ${{ total }}
+  </div>
+</div>
 
   </div>
 </template>

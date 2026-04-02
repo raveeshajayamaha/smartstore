@@ -20,12 +20,6 @@ const { addToCart } = useCart()
       ${{ product.price }}
     </p>
 
-    <router-link
-      :to="'/product/' + product.id"
-      class="text-blue-500"
-    >
-      View
-    </router-link>
 
     <button
   @click="addToCart(product)"
