@@ -19,7 +19,9 @@ const { addToCart } = useCart()
     <p class="text-green-600">
       ${{ product.price }}
     </p>
-
+<div class="mt-2 text-blue-600 text-sm font-medium cursor-pointer hover:underline">
+  View
+</div>
 
     <button
   @click="addToCart(product)"

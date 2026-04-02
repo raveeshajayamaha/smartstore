@@ -5,11 +5,12 @@ import ProductCard from "../components/ProductCard.vue";
 import type { Product } from "../types/product"
 import { useCart } from "../store/cart"
 
-const { cart, removeFromCart, total } = useCart()
+const { cart, removeFromCart, increaseQty, decreaseQty, total } = useCart()
 
 const products = ref<Product[]>([])
 const search = ref("")
 const category = ref("")
+
 
 onMounted(async () => {
   const res = await api.get("/products")
@@ -65,7 +66,7 @@ const categories = computed(() => {
       />
     </div>
     <!-- 🛒 CART SECTION -->
-<div class="mt-10 p-4 border rounded-lg bg-gray-100">
+<<div id="cart-section" class="mt-10 p-4 border rounded-lg bg-gray-100">
   <h2 class="text-2xl font-bold mb-4">🛒 Cart</h2>
 
   <div v-if="cart.length === 0">
@@ -75,12 +76,36 @@ const categories = computed(() => {
   <div
     v-for="item in cart"
     :key="item.id"
-    class="flex justify-between items-center mb-2"
+    class="flex justify-between items-center mb-2 border p-2 rounded"
   >
     <div>
       {{ item.title }} - ${{ item.price }}
+
+      <div class="flex items-center mt-1">
+        
+        <!-- ➖ decrease -->
+        <button
+          @click="decreaseQty(item.id)"
+          class="px-2 bg-gray-300"
+        >
+          -
+        </button>
+
+        <!-- quantity -->
+        <span class="mx-2">{{ item.quantity }}</span>
+
+        <!-- ➕ increase -->
+        <button
+          @click="increaseQty(item.id)"
+          class="px-2 bg-gray-300"
+        >
+          +
+        </button>
+
+      </div>
     </div>
 
+    <!-- ❌ remove -->
     <button
       @click="removeFromCart(item.id)"
       class="bg-red-500 text-white px-2 py-1 rounded"
