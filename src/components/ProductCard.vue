@@ -2,10 +2,17 @@
 import type { Product } from "../types/product"
 import { useCart } from "../store/cart"
 
-defineProps<{
+
+const { product } = defineProps<{
   product: Product
 }>()
+
+
 const { addToCart } = useCart()
+
+const buyNow = () => {
+  addToCart(product)
+}
 </script>
 
 <template>
@@ -19,6 +26,7 @@ const { addToCart } = useCart()
     <p class="text-green-600">
       ${{ product.price }}
     </p>
+    
 <div class="mt-2 text-blue-600 text-sm font-medium cursor-pointer hover:underline">
   View
 </div>
@@ -29,5 +37,10 @@ const { addToCart } = useCart()
 >
   Add to Cart
 </button>
+
+<button @click="buyNow">
+  ⚡ Buy Now
+</button>
+
   </div>
 </template>

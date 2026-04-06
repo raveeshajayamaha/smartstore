@@ -21,6 +21,15 @@
 >
   Cart 🛒
 </a>
+
+   <span class="hover:text-yellow-300 cursor-pointer">
+        Login
+      </span>
+
+       <span class="hover:text-yellow-300 cursor-pointer">
+        Signup
+      </span>
+      
     </div>
 
   </nav>
