@@ -6,6 +6,10 @@ const { product } = defineProps<{
   product: Product
 }>()
 
+const emit = defineEmits<{
+  (e: 'view', product: Product): void
+}>()
+
 const { addToCart } = useCart()
 
 const handleImgError = (e: Event) => {
@@ -16,29 +20,25 @@ const handleImgError = (e: Event) => {
 
 <template>
   <div class="product-card">
-
-    <!-- Category Badge -->
     <div class="card-image-wrapper">
       <span class="category-badge">{{ product.category }}</span>
-     <img 
-  :src="product.thumbnail" 
-  class="card-image"
-  @error="handleImgError"
-/>
+      <img
+        :src="product.thumbnail"
+        class="card-image"
+        @error="handleImgError"
+      />
     </div>
 
-    <!-- Info -->
     <div class="card-body">
       <h2 class="card-title">{{ product.title }}</h2>
-
       <div class="card-footer">
         <span class="card-price">${{ product.price }}</span>
-        <button @click="addToCart(product)" class="add-btn">
-          🛒 Add
-        </button>
+        <div class="card-actions">
+          <button @click="emit('view', product)" class="view-btn">👁 View</button>
+          <button @click="addToCart(product)" class="add-btn">🛒 Add</button>
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -105,11 +105,32 @@ const handleImgError = (e: Event) => {
   color: #27ae60;
 }
 
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn {
+  background: white;
+  color: #27ae60;
+  border: 1.5px solid #27ae60;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-btn:hover {
+  background: #f0faf4;
+}
+
 .add-btn {
   background: #27ae60;
   color: white;
   border: none;
-  padding: 8px 18px;
+  padding: 8px 14px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;

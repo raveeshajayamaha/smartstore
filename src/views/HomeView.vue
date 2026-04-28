@@ -1,17 +1,20 @@
+
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue"
 import api from "../services/api"
 import ProductCard from "../components/ProductCard.vue"
+import ProductModal from "../components/ProductModal.vue"
 import type { Product } from "../types/product"
 import { useCart } from "../store/cart"
+import { search } from "../store/search"
 
 const { cart, removeFromCart, increaseQty, decreaseQty, total } = useCart()
 
 const products = ref<Product[]>([])
-const search = ref("")
 const category = ref("")
+const selectedProduct = ref<Product | null>(null)
 
-// ✅ These must be OUTSIDE onMounted
+
 const filteredProducts = computed(() => {
   return products.value.filter(p =>
     (
@@ -40,23 +43,20 @@ const categoryColors: Record<string, string> = {
   detox: "#EEF0FB",
 }
 
-// ✅ onMounted only loads data
 onMounted(async () => {
   await api.get("/products?limit=1")
 
- products.value = [
-    { id: 1,  title: "Cinnamon Spice Tea",    price: 18.99, category: "cinnamon", thumbnail: "https://images.unsplash.com/photo-1609250836047-6a785d3a5e4b?w=400&fit=crop" },
-    { id: 2,  title: "Cardamom Green Tea",    price: 22.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&fit=crop" },
-    { id: 3,  title: "Ginger Root Tea",       price: 16.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1669652639337-d1b4e21bf04c?w=400&fit=crop" },
-    { id: 4,  title: "Mixed Herbal Blend",    price: 19.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1674729444215-7c2bc4c8f32f?w=400&fit=crop" },
+products.value = [
+    { id: 1,  title: "Cinnamon Spice Tea",    price: 18.99, category: "cinnamon", thumbnail: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&fit=crop" },
+    { id: 2,  title: "Cardamom Green Tea",    price: 22.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400&fit=crop" },
+    { id: 3,  title: "Ginger Root Tea",       price: 16.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&fit=crop" },
+    { id: 4,  title: "Mixed Herbal Blend",    price: 19.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&fit=crop" },
     { id: 5,  title: "Detox Herbal Tea",      price: 24.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400&fit=crop" },
-    { id: 6,  title: "Turmeric Wellness Tea", price: 21.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&fit=crop" },
-    { id: 7,  title: "Chai Masala Tea",       price: 20.99, category: "cinnamon", thumbnail: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&fit=crop" },
-    { id: 8,  title: "Mint & Lemon Detox",    price: 17.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1628348070889-cb656235b4eb?w=400&fit=crop" },
+    { id: 6, title: "Turmeric Wellness Tea", price: 21.99, category: "herbal", thumbnail: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&fit=crop" },
+    { id: 7,  title: "Chai Masala Tea",       price: 20.99, category: "cinnamon", thumbnail: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?w=400" },
+    { id: 8,  title: "Mint & Lemon Detox",    price: 17.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1523920290228-4f321a939b4c?w=400&fit=crop" },
     { id: 9,  title: "Cardamom Rose Tea",     price: 23.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&fit=crop" },
-    { id: 10, title: "Cinnamon Honey Tea",    price: 19.49, category: "cinnamon", thumbnail: "https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=400&fit=crop" },
-    { id: 11, title: "Peppermint Detox",      price: 15.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1523920290228-4f321a939b4c?w=400&fit=crop" },
-    { id: 12, title: "Lemongrass Herbal",     price: 18.49, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&fit=crop" },
+    { id: 10, title: "Peppermint Detox",      price: 15.99, category: "detox",    thumbnail: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?auto=compress&w=400" },
 ] as Product[]
 })
 </script>
@@ -109,14 +109,20 @@ onMounted(async () => {
         </select>
       </div>
 
-      <!-- Product Grid -->
-      <div class="product-grid">
-        <ProductCard
-          v-for="p in filteredProducts"
-          :key="p.id"
-          :product="p"
-        />
-      </div>
+   <div class="product-grid">
+  <ProductCard
+    v-for="p in filteredProducts"
+    :key="p.id"
+    :product="p"
+    @view="selectedProduct = p"
+  />
+</div>
+
+<!-- Modal -->
+<ProductModal
+  :product="selectedProduct"
+  @close="selectedProduct = null"
+/>
     </section>
 
     <!-- ===== CART SECTION ===== -->

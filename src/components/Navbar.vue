@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { search } from "../store/search"
 </script>
 
 <template>
@@ -13,6 +13,7 @@
       </div>
     </div>
 
+
     <!-- Nav Links -->
 <div class="nav-links">
   <a href="#" class="nav-link">🏠 Home</a>
@@ -23,7 +24,7 @@
     <div class="nav-right">
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Search teas..." class="search-input" />
+       <input v-model="search" type="text" placeholder="Search teas..." class="search-input" />
       </div>
       <a href="#cart-section" class="cart-btn">🛒 Cart</a>
     </div>
