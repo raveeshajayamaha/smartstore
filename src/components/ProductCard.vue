@@ -42,7 +42,7 @@ const handleImgError = (e: Event) => {
   </div>
 </template>
 
-<style scoped>
+<style>
 .product-card {
   background: white;
   border-radius: 16px;
@@ -140,6 +140,18 @@ const handleImgError = (e: Event) => {
 
 .add-btn:hover {
   background: #219a52;
+}
+.dark .product-card {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.dark .card-title {
+  color: #f9fafb;
+}
+
+.dark .view-btn {
+  background: #1f2937;
 }
 </style>
 

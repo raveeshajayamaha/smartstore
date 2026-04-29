@@ -7,6 +7,7 @@ import ProductModal from "../components/ProductModal.vue"
 import type { Product } from "../types/product"
 import { useCart } from "../store/cart"
 import { search } from "../store/search"
+import { isDark } from "../store/theme"
 
 const { cart, removeFromCart, increaseQty, decreaseQty, total } = useCart()
 
@@ -79,7 +80,7 @@ products.value = [
 
     <!-- ===== SHOP BY CATEGORY ===== -->
     <section class="category-section">
-      <h2 class="section-title">Shop by Category</h2>
+      <h2 class="section-title" style="color: #1a1a2e; font-size: 32px; font-weight: 700;">Shop by Category</h2>
       <p class="section-sub">Explore our carefully curated collection of herbal and spice teas</p>
 
       <div class="category-grid">
@@ -126,11 +127,15 @@ products.value = [
     </section>
 
     <!-- ===== CART SECTION ===== -->
-    <section id="cart-section" class="cart-section">
-      <h2 class="cart-title">🛒 Your Cart</h2>
+     <section 
+    id="cart-section" 
+    class="cart-section"
+     :style="isDark ? { background: '#1f2937', borderColor: '#374151' } : {}"
+       >
+      <h2 class="cart-title" :style="isDark ? { color: '#f9fafb' } : {}">🛒 Your Cart</h2>
 
-      <div v-if="cart.length === 0" class="cart-empty">
-        Your cart is empty
+      <div v-if="cart.length === 0" class="cart-empty" :style="isDark ? { color: '#6b7280' } : {}">
+          Your cart is empty
       </div>
 
       <div
@@ -159,7 +164,7 @@ products.value = [
   </div>
 </template>
 
-<style scoped>
+<style>
 
 /* ===== HERO ===== */
 .hero {
@@ -410,5 +415,58 @@ products.value = [
   .category-grid { grid-template-columns: repeat(2, 1fr); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
   .shop-section, .cart-section { padding: 20px; margin: 20px; }
+}
+
+/* ===== DARK MODE ===== */
+.dark .category-section {
+  background: linear-gradient(180deg, #1a2e1a, #111827);
+}
+
+.dark .section-title {
+  color: #f9fafb ;
+}
+
+.dark .section-sub {
+  color: #9ca3af ;
+}
+
+.dark .shop-section {
+  background: #111827 ;
+}
+
+.dark .filter-select {
+  background: #1f2937;
+  color: #f9fafb ;
+  border-color: #374151;
+}
+
+.cart-dark {
+  background: #1f2937 ;
+  border-color: #374151;
+}
+
+.cart-dark .cart-title {
+  color: #f9fafb;
+}
+
+.cart-dark .cart-empty {
+  color: #6b7280 t;
+}
+
+.cart-dark .cart-item {
+  border-color: #374151 ;
+}
+
+.cart-dark .cart-item-name {
+  color: #f9fafb ;
+}
+
+.cart-dark .cart-total {
+  color: #f9fafb ;
+}
+
+.cart-dark .qty-btn {
+  background: #374151 ;
+  color: #f9fafb ;
 }
 </style>

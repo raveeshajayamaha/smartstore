@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import { search } from "../store/search"
+import { ref } from "vue"
+import { isLoggedIn, username, logout, initAuth } from "../store/auth"
+import LoginModal from "./LoginModal.vue"
+import { isDark, toggleTheme, initTheme } from "../store/theme"
+initTheme()
+
+const showLogin = ref(false)
+initAuth()
 </script>
 
 <template>
@@ -26,8 +34,19 @@ import { search } from "../store/search"
         <span class="search-icon">🔍</span>
        <input v-model="search" type="text" placeholder="Search teas..." class="search-input" />
       </div>
+      
+      <div v-if="isLoggedIn" class="user-info">
+          <span class="username">👤 {{ username }}</span>
+         <button @click="logout" class="logout-btn">Logout</button>
+      </div>
+       <button v-else @click="showLogin = true" class="login-btn">Login</button>
+        <!-- Dark Mode Toggle -->
+      <button @click="toggleTheme" class="theme-btn">
+          {{ isDark ? '☀️' : '🌙' }}
+       </button>
       <a href="#cart-section" class="cart-btn">🛒 Cart</a>
     </div>
+     <LoginModal v-if="showLogin" @close="showLogin = false" />
   </nav>
 </template>
 
@@ -140,5 +159,87 @@ import { search } from "../store/search"
 
 .cart-btn:hover {
   background: #219a52;
+}
+.login-btn {
+  background: white;
+  color: #27ae60;
+  border: 1.5px solid #27ae60;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn:hover { background: #f0faf4; }
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a5c38;
+}
+
+.logout-btn {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover { background: #fecaca; }
+
+.theme-btn {
+  background: #f3f4f6;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.theme-btn:hover {
+  background: #e5e7eb;
+}
+
+:global(.dark) .navbar {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+:global(.dark) .brand-name {
+  color: #86efac;
+}
+
+:global(.dark) .nav-link {
+  color: #d1d5db;
+}
+
+:global(.dark) .search-box {
+  background: #374151;
+}
+
+:global(.dark) .search-input {
+  color: #f9fafb;
+}
+
+:global(.dark) .theme-btn {
+  background: #374151;
+}
+
+:global(.dark) .username {
+  color: #86efac;
 }
 </style>
