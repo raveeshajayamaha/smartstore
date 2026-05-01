@@ -43,6 +43,7 @@ const handleImgError = (e: Event) => {
 </template>
 
 <style>
+
 .product-card {
   background: white;
   border-radius: 16px;
@@ -111,47 +112,98 @@ const handleImgError = (e: Event) => {
 }
 
 .view-btn {
-  background: white;
-  color: #27ae60;
-  border: 1.5px solid #27ae60;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
+  background: white !important;
+  color: #27ae60 !important;
+  border: 1.5px solid #27ae60 !important;
+  padding: 8px 16px !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
   cursor: pointer;
   transition: all 0.2s;
+  width: auto !important;
+  height: auto !important;
+  display: inline-block !important;
 }
 
 .view-btn:hover {
-  background: #f0faf4;
+  background: #f0faf4 !important;
 }
 
 .add-btn {
-  background: #27ae60;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
+  background: #27ae60 !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
   cursor: pointer;
   transition: background 0.2s;
+  width: auto !important;
+  height: auto !important;
+  display: inline-block !important;
 }
 
 .add-btn:hover {
-  background: #219a52;
+  background: #219a52 !important;
 }
+
+/* ===== DARK MODE ===== */
 .dark .product-card {
-  background: #1f2937;
+  background: #1f2937 !important;
   border-color: #374151;
 }
 
 .dark .card-title {
-  color: #f9fafb;
+  color: #f9fafb !important;
 }
 
 .dark .view-btn {
-  background: #1f2937;
+  background: #1f2937 !important;
+  color: #27ae60 !important;
+}
+
+.dark .card-price {
+  color: #4ade80;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .view-btn {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    flex: 1;
+    text-align: center;
+  }
+
+  .add-btn {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    flex: 1;
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 13px;
+  }
+
+  .card-price {
+    font-size: 14px;
+  }
 }
 </style>
+
 

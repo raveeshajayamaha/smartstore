@@ -53,11 +53,11 @@ products.value = [
     { id: 3,  title: "Ginger Root Tea",       price: 16.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&fit=crop" },
     { id: 4,  title: "Mixed Herbal Blend",    price: 19.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&fit=crop" },
     { id: 5,  title: "Detox Herbal Tea",      price: 24.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400&fit=crop" },
-    { id: 6, title: "Turmeric Wellness Tea", price: 21.99, category: "herbal", thumbnail: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&fit=crop" },
+    { id: 6, title: "Turmeric Wellness Tea", price: 21.99, category: "herbal", thumbnail: "https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&w=400" },
     { id: 7,  title: "Chai Masala Tea",       price: 20.99, category: "cinnamon", thumbnail: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?w=400" },
     { id: 8,  title: "Mint & Lemon Detox",    price: 17.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1523920290228-4f321a939b4c?w=400&fit=crop" },
     { id: 9,  title: "Cardamom Rose Tea",     price: 23.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&fit=crop" },
-    { id: 10, title: "Peppermint Detox",      price: 15.99, category: "detox",    thumbnail: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?auto=compress&w=400" },
+    { id: 10, title: "Peppermint Detox", price: 15.99, category: "detox", thumbnail: "https://images.pexels.com/photos/5946641/pexels-photo-5946641.jpeg?auto=compress&w=400" },
 ] as Product[]
 })
 </script>
@@ -226,14 +226,6 @@ products.value = [
   background: linear-gradient(180deg, #f0faf4, #ffffff);
   padding: 56px 48px;
   text-align: center;
-}
-
-.section-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 8px;
-  font-family: Georgia, serif;
 }
 
 .section-sub {
@@ -468,5 +460,38 @@ products.value = [
 .cart-dark .qty-btn {
   background: #374151 ;
   color: #f9fafb ;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 20px;
+    min-height: 300px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shop-section {
+    padding: 20px;
+  }
+
+  .cart-section {
+    margin: 20px;
+    padding: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 </style>

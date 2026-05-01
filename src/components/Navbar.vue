@@ -242,4 +242,41 @@ initAuth()
 :global(.dark) .username {
   color: #86efac;
 }
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .search-box {
+    width: 120px;
+  }
+
+  .search-input {
+    width: 80px;
+  }
+
+  .brand-name {
+    font-size: 14px;
+  }
+
+  .brand-sub {
+    font-size: 9px;
+  }
+
+  .cart-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .login-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
 </style>

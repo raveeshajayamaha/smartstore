@@ -1,17 +1,23 @@
-import { ref, computed } from "vue"
+import { ref, computed, watch } from "vue"
 import type { Product } from "../types/product"
 
 type CartItem = Product & {
   quantity: number
 }
 
-const cart = ref<CartItem[]>([])
+// ✅ Load from localStorage on startup
+const savedCart = localStorage.getItem("cart")
+const cart = ref<CartItem[]>(savedCart ? JSON.parse(savedCart) : [])
+
+// ✅ Save to localStorage whenever cart changes
+watch(cart, (newCart) => {
+  localStorage.setItem("cart", JSON.stringify(newCart))
+}, { deep: true })
 
 export function useCart() {
 
   const addToCart = (product: Product) => {
     const existing = cart.value.find(item => item.id === product.id)
-
     if (existing) {
       existing.quantity++
     } else {
@@ -26,7 +32,6 @@ export function useCart() {
 
   const decreaseQty = (id: number) => {
     const item = cart.value.find(p => p.id === id)
-
     if (item) {
       item.quantity--
       if (item.quantity <= 0) {
@@ -40,7 +45,7 @@ export function useCart() {
   }
 
   const total = computed(() => {
-    return cart.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    return cart.value.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)
   })
 
   return {
