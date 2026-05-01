@@ -1,11 +1,13 @@
 <script setup>
 import Navbar from './components/Navbar.vue'
+import ToastNotification from './components/ToastNotification.vue'
 </script>
 
 <template>
   <div class="app-wrapper">
     <Navbar />
     <router-view />
+    <ToastNotification />
   </div>
 </template>
 

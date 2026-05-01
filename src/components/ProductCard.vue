@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Product } from "../types/product"
 import { useCart } from "../store/cart"
+import { showToast } from "../store/toast"
 
 const { product } = defineProps<{
   product: Product
@@ -15,6 +16,11 @@ const { addToCart } = useCart()
 const handleImgError = (e: Event) => {
   const img = e.target as HTMLImageElement
   img.src = 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&fit=crop'
+}
+
+const handleAddToCart = () => {
+  addToCart(product)
+  showToast(`${product.title} added to cart!`)
 }
 </script>
 
@@ -35,7 +41,7 @@ const handleImgError = (e: Event) => {
         <span class="card-price">${{ product.price }}</span>
         <div class="card-actions">
           <button @click="emit('view', product)" class="view-btn">👁 View</button>
-          <button @click="addToCart(product)" class="add-btn">🛒 Add</button>
+          <button @click="handleAddToCart" class="add-btn">🛒 Add</button>
         </div>
       </div>
     </div>
@@ -112,56 +118,56 @@ const handleImgError = (e: Event) => {
 }
 
 .view-btn {
-  background: white !important;
-  color: #27ae60 !important;
-  border: 1.5px solid #27ae60 !important;
-  padding: 8px 16px !important;
-  border-radius: 999px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
+  background: white ;
+  color: #27ae60;
+  border: 1.5px solid #27ae60 ;
+  padding: 8px 16px ;
+  border-radius: 999px ;
+  font-size: 13px ;
+  font-weight: 600 ;
   cursor: pointer;
   transition: all 0.2s;
-  width: auto !important;
-  height: auto !important;
-  display: inline-block !important;
+  width: auto ;
+  height: auto ;
+  display: inline-block ;
 }
 
 .view-btn:hover {
-  background: #f0faf4 !important;
+  background: #f0faf4;
 }
 
 .add-btn {
-  background: #27ae60 !important;
-  color: white !important;
-  border: none !important;
-  padding: 8px 16px !important;
-  border-radius: 999px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
+  background: #27ae60;
+  color: white;
+  border: none ;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
-  width: auto !important;
-  height: auto !important;
-  display: inline-block !important;
+  width: auto;
+  height: auto;
+  display: inline-block;
 }
 
 .add-btn:hover {
-  background: #219a52 !important;
+  background: #219a52;
 }
 
 /* ===== DARK MODE ===== */
 .dark .product-card {
-  background: #1f2937 !important;
+  background: #1f2937;
   border-color: #374151;
 }
 
 .dark .card-title {
-  color: #f9fafb !important;
+  color: #f9fafb ;
 }
 
 .dark .view-btn {
-  background: #1f2937 !important;
-  color: #27ae60 !important;
+  background: #1f2937;
+  color: #27ae60 ;
 }
 
 .dark .card-price {
@@ -183,15 +189,15 @@ const handleImgError = (e: Event) => {
   }
 
   .view-btn {
-    padding: 8px 16px !important;
-    font-size: 12px !important;
+    padding: 8px 16px ;
+    font-size: 12px;
     flex: 1;
     text-align: center;
   }
 
   .add-btn {
-    padding: 8px 16px !important;
-    font-size: 12px !important;
+    padding: 8px 16px ;
+    font-size: 12px;
     flex: 1;
     text-align: center;
   }

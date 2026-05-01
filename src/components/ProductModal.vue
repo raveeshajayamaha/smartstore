@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Product } from "../types/product"
 import { useCart } from "../store/cart"
+import { showToast } from "../store/toast"
 
 defineProps<{
   product: Product | null
@@ -42,11 +43,11 @@ const handleImgError = (e: Event) => {
 
         <div class="modal-footer">
           <span class="modal-price">${{ product.price }}</span>
-          <button
-            @click="() => { addToCart(product!); emit('close') }"
-            class="modal-add-btn"
-          >
-            🛒 Add to Cart
+         <button 
+             @click="() => { addToCart(product!); showToast(product!.title + ' added to cart!'); emit('close') }" 
+             class="modal-add-btn"
+>
+              🛒 Add to Cart
           </button>
         </div>
       </div>
