@@ -48,16 +48,16 @@ onMounted(async () => {
   await api.get("/products?limit=1")
 
 products.value = [
-    { id: 1,  title: "Cinnamon Spice Tea",    price: 18.99, category: "cinnamon", thumbnail: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&fit=crop" },
-    { id: 2,  title: "Cardamom Green Tea",    price: 22.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400&fit=crop" },
-    { id: 3,  title: "Ginger Root Tea",       price: 16.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&fit=crop" },
-    { id: 4,  title: "Mixed Herbal Blend",    price: 19.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&fit=crop" },
-    { id: 5,  title: "Detox Herbal Tea",      price: 24.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400&fit=crop" },
-    { id: 6, title: "Turmeric Wellness Tea", price: 21.99, category: "herbal", thumbnail: "https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&w=400" },
-    { id: 7,  title: "Chai Masala Tea",       price: 20.99, category: "cinnamon", thumbnail: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?w=400" },
-    { id: 8,  title: "Mint & Lemon Detox",    price: 17.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1523920290228-4f321a939b4c?w=400&fit=crop" },
-    { id: 9,  title: "Cardamom Rose Tea",     price: 23.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&fit=crop" },
-    { id: 10, title: "Peppermint Detox", price: 15.99, category: "detox", thumbnail: "https://images.pexels.com/photos/5946641/pexels-photo-5946641.jpeg?auto=compress&w=400" },
+    { id: 1,  title: "Cinnamon Spice Tea",    price: 18.99, category: "cinnamon", thumbnail: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&fit=crop",  stock: true },
+    { id: 2,  title: "Cardamom Green Tea",    price: 22.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400&fit=crop" ,  stock: true},
+    { id: 3,  title: "Ginger Root Tea",       price: 16.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&fit=crop" , stock: true },
+    { id: 4,  title: "Mixed Herbal Blend",    price: 19.99, category: "herbal",   thumbnail: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&fit=crop",  stock: true },
+    { id: 5,  title: "Detox Herbal Tea",      price: 24.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400&fit=crop", stock: true },
+    { id: 6, title: "Turmeric Wellness Tea", price: 21.99, category: "herbal", thumbnail: "https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&w=400",  stock: true },
+    { id: 7,  title: "Chai Masala Tea",       price: 20.99, category: "cinnamon", thumbnail: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?w=400",  stock: true },
+    { id: 8,  title: "Mint & Lemon Detox",    price: 17.99, category: "detox",    thumbnail: "https://images.unsplash.com/photo-1523920290228-4f321a939b4c?w=400&fit=crop",  stock: true },
+    { id: 9,  title: "Cardamom Rose Tea",     price: 23.99, category: "cardamom", thumbnail: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&fit=crop" , stock: true},
+    { id: 10, title: "Peppermint Detox", price: 15.99, category: "detox", thumbnail: "https://images.pexels.com/photos/5946641/pexels-photo-5946641.jpeg?auto=compress&w=400", stock: true },
 ] as Product[]
 })
 </script>

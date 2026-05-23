@@ -28,6 +28,9 @@ const handleAddToCart = () => {
   <div class="product-card">
     <div class="card-image-wrapper">
       <span class="category-badge">{{ product.category }}</span>
+      <span class="stock-badge" :class="product.stock ? 'in-stock' : 'out-stock'">
+  {{ product.stock ? '✅ In Stock' : '❌ Out of Stock' }}
+</span>
       <img
         :src="product.thumbnail"
         class="card-image"
@@ -172,6 +175,27 @@ const handleAddToCart = () => {
 
 .dark .card-price {
   color: #4ade80;
+}
+
+.stock-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.in-stock {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.out-stock {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 /* ===== MOBILE ===== */
